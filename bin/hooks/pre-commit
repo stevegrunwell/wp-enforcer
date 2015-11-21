@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+#
+# Commands to be run before a commit can be made to the repository
+#
+# @package WP Enforcer
+
+# Run PHP CodeSniffer
+echo "Running PHP CodeSniffer..."
+./vendor/bin/phpcs
+if [ $? != 0 ]
+then
+	echo "Please fix coding standards errors before committing"
+	exit 1
+fi

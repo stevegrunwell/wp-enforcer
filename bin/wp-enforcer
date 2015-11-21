@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+#
+# Copy files for WP Enforcer into the project directory.
+
+readonly DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+readonly PROJECT="$(pwd)"
+
+# Display a confirmation message and return 0/1 based on the result.
+confirm() {
+  read -r -p "$1 [Y/n] " response
+  response=$(echo "$response" | tr '[:upper:]' '[:lower:]')
+
+  if [[ $response == "y" ]]; then
+    return 0
+  fi
+
+  return 1
+}
+
+# Copy the given hook into the project and make the script executable.
+copy_hook() {
+  local hook=$1
+
+  cp $DIR/hooks/$hook $PROJECT/.git/hooks/$hook
+  chmod +x $PROJECT/.git/hooks/$hook
+  echo "Copying $hook hook"
+}
+
+# Trigger an error and exit, but also tell users how they can re-run the script.
+error() {
+  echo
+  echo "Error: $1" >&2
+  echo "You may re-run this setup at any time by running $DIR/wp-enforcer"
+  echo
+  exit 1;
+}
+
+echo "Installing WP Enforcer..."
+
+# Check that the target Git repository exists
+if [[ ! -d $PROJECT/.git ]]; then
+  error "No .git directory found in your project, unable to copy Git hooks!"
+fi
+
+# Copy git hooks, ensuring we're not overwriting anything unexpectedly.
+if [[ -f $PROJECT/.git/hooks/pre-commit ]]; then
+
+  # Diff the files and only prompt if they're different
+  if ! cmp $DIR/hooks/pre-commit $PROJECT/.git/hooks/pre-commit >/dev/null 2>&1; then
+    echo "A pre-commit hook already exists in $PROJECT/.git/hooks/pre-commit."
+    if confirm "Overwrite the existing file?"; then
+      copy_hook "pre-commit"
+    fi
+  else
+    echo "pre-commit hook already exists, skipping"
+  fi
+
+else
+  copy_hook "pre-commit"
+fi
+
+echo
+echo "WP Enforcer installed successfully!"
+
+exit 0
