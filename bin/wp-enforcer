@@ -2,7 +2,7 @@
 #
 # Copy files for WP Enforcer into the project directory.
 
-readonly DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+readonly DIR="$(cd "$(dirname "$0")" && pwd -P)/$(dirname $(readlink "$0"))"
 readonly PROJECT="$(pwd)"
 
 # Display a confirmation message and return 0/1 based on the result.
