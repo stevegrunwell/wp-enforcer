@@ -2,7 +2,8 @@
 #
 # Copy files for WP Enforcer into the project directory.
 
-readonly DIR="$(cd "$(dirname "$0")" && pwd -P)/$(dirname $(readlink "$0"))"
+readonly BIN="$(cd "$(dirname "$0")" && pwd -P)"
+readonly DIR="$BIN/$(dirname $(readlink "$0"))"
 readonly PROJECT="$(pwd)"
 
 # Display a confirmation message and return 0/1 based on the result.
@@ -59,7 +60,18 @@ else
   copy_hook "pre-commit"
 fi
 
+# Copy the PHP CodeSniffer standards file
+if [[ ! -f $PROJECT/phpcs.xml ]]; then
+  cp $DIR/../phpcs.xml.sample $PROJECT/phpcs.xml
+  echo "Created sample phpcs.xml file"
+fi
+
+# Configure PHP CodeSniffer
+installed_paths="$($BIN/phpcs --config-show | grep "installed_paths:")"
+if [[ $installed_paths != "installed_paths: ../../wp-coding-standards/wpcs" ]]; then
+  $BIN/phpcs --config-set installed_paths ../../wp-coding-standards/wpcs
+fi
+
 echo
 echo "WP Enforcer installed successfully!"
-
 exit 0
