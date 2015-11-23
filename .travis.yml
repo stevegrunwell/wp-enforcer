@@ -7,7 +7,7 @@ php:
 
 before_script:
   - composer install --prefer-source
-  - ln -s ./bin/wp-enforcer ./vendor/bin/wp-enforcer
+  - ln -s bin/wp-enforcer vendor/bin/wp-enforcer
 
 script:
   - ./vendor/bin/wp-enforcer
