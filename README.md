@@ -32,10 +32,10 @@ If you'd like to require WP Enforcer for all developers on your project, you can
 
 ```json
 "post-install-cmd": [
-	"./vendor/bin/wp-enforcer"
+	"wp-enforcer"
 ],
 "post-update-cmd": [
-	"./vendor/bin/wp-enforcer"
+	"wp-enforcer"
 ]
 ```
 

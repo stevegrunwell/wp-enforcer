@@ -14,7 +14,7 @@ fi
 # Run PHP CodeSniffer
 echo "Running PHP CodeSniffer..."
 
-git diff --name-only --cached | xargs ./vendor/bin/phpcs $standard
+git diff --name-only --cached | xargs phpcs $standard
 if [ $? != 0 ]
 then
 	echo "Please fix coding standards errors before committing"
