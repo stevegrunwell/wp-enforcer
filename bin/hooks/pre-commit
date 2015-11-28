@@ -4,9 +4,17 @@
 #
 # @package WP Enforcer
 
+# Determine if we have a phpcs.xml file
+if [[ -f ./phpcs.xml ]]; then
+	standard="--standard=./phpcs.xml"
+else
+	standard=''
+fi
+
 # Run PHP CodeSniffer
 echo "Running PHP CodeSniffer..."
-./vendor/bin/phpcs
+
+git diff --name-only --cached | xargs ./vendor/bin/phpcs $standard
 if [ $? != 0 ]
 then
 	echo "Please fix coding standards errors before committing"

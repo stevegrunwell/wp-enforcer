@@ -49,7 +49,7 @@ For a complete list of configuration options, see [the PHP CodeSniffer ruleset.x
 
 ## Adding to an Existing Project
 
-Adding coding standards to an existing project can be a painful process. If the current codebase is a mess, making even standards cleanup commits becomes a giant hassle.
+Adding coding standards to an existing project can be a painful process. WP Enforcer will only run the Git hook against changed files, but if the current codebase is a mess, making even standards cleanup commits becomes a giant hassle.
 
 If you're adding WP Enforcer to a current project, it's recommended to follow the installation instructions above **in a new clean-up branch**, then remove the pre-commit hook:
 
@@ -70,3 +70,10 @@ $ ./vendor/bin/wp-enforcer
 ```
 
 Finally, merge your clean-up branch into master, kicking your project's coding standards compliance into high gear.
+
+## Changelog
+
+### 0.2.0
+
+* Restrict the Git hook to only changed files, not the entire codebase ([#1](https://github.com/stevegrunwell/wp-enforcer/issues/1)).
+* Confirmed Windows Compatibility (as Git Bash ships with a version of Cygwin for all the Unix-y goodness needed). Props @EricMann ([#2](https://github.com/stevegrunwell/wp-enforcer/issues/2)).
