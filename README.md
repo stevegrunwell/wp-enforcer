@@ -73,7 +73,12 @@ Finally, merge your clean-up branch into master, kicking your project's coding s
 
 ## Changelog
 
-### 0.2.0
+### 0.3.0 - November 29, 2015
+
+* Remove explicit references to `./vendor/bin/`, as Composer automatically prepends this directory to the user's path ([#3](https://github.com/stevegrunwell/wp-enforcer/issues/3)). Props @johnpbloch, @bswatson.
+* Automatically create a `.git/hooks` directory if it doesn't already exist ([#5](https://github.com/stevegrunwell/wp-enforcer/issues/5)).
+
+### 0.2.0 - November 27, 2015
 
 * Restrict the Git hook to only changed files, not the entire codebase ([#1](https://github.com/stevegrunwell/wp-enforcer/issues/1)).
 * Confirmed Windows Compatibility (as Git Bash ships with a version of Cygwin for all the Unix-y goodness needed). Props @EricMann ([#2](https://github.com/stevegrunwell/wp-enforcer/issues/2)).
