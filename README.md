@@ -1,5 +1,8 @@
 # WP Enforcer
 
+[![GitHub release](https://img.shields.io/github/release/stevegrunwell/wp-enforcer.svg)](https://github.com/stevegrunwell/wp-enforcer/releases/latest)
+[![GitHub license](https://img.shields.io/github/license/stevegrunwell/wp-enforcer.svg)](https://github.com/stevegrunwell/wp-enforcer/blob/master/LICENSE.txt)
+
 When writing for a platform as big as WordPress – especially in a team environment – a consistent set of coding standards is vital. Having multiple developers committing code using a mixture of spaces and tabs, inconsistent formatting, or otherwise varying coding styles can lead to headache-inducing merge conflicts.
 
 There are a number of great tools available to check against established coding standards (namely [PHP CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer)), but setting them up on a project can be a pain. WP Enforcer is designed to make this setup a breeze.
