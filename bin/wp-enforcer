@@ -43,6 +43,12 @@ if [[ ! -d $PROJECT/.git ]]; then
   error "No .git directory found in your project, unable to copy Git hooks!"
 fi
 
+# Verify that the hooks/ directory exists within .git/
+if [[ ! -d $PROJECT/.git/hooks ]]; then
+  echo "Creating hooks/ directory in Git repository"
+  mkdir $PROJECT/.git/hooks
+fi
+
 # Copy git hooks, ensuring we're not overwriting anything unexpectedly.
 if [[ -f $PROJECT/.git/hooks/pre-commit ]]; then
 
