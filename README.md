@@ -76,6 +76,10 @@ Finally, merge your clean-up branch into master, kicking your project's coding s
 
 ## Changelog
 
+### 0.4.0
+
+* Restore explicit reference to `vendor/bin` (previously removed in [#3](https://github.com/stevegrunwell/wp-enforcer/issues/3)) within the pre-commit Git hook ([#11](https://github.com/stevegrunwell/wp-enforcer/issues/11)). Props @leewillis77.
+
 ### 0.3.0 - November 29, 2015
 
 * Remove explicit references to `./vendor/bin/`, as Composer automatically prepends this directory to the user's path ([#3](https://github.com/stevegrunwell/wp-enforcer/issues/3)). Props @johnpbloch, @bswatson.
