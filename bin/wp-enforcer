@@ -3,7 +3,7 @@
 # Copy files for WP Enforcer into the project directory.
 
 readonly BIN="$(cd "$(dirname "$0")" && pwd -P)"
-readonly DIR="$BIN/$(dirname $(readlink "$0"))"
+readonly DIR="$BIN/$(dirname "$(readlink "$0")")"
 readonly PROJECT="$(pwd)"
 
 # Display a confirmation message and return 0/1 based on the result.
@@ -11,7 +11,7 @@ confirm() {
   read -r -p "$1 [Y/n] " response
   response=$(echo "$response" | tr '[:upper:]' '[:lower:]')
 
-  if [[ $response == "y" ]]; then
+  if [[ "$response" == "y" ]]; then
     return 0
   fi
 
@@ -20,10 +20,10 @@ confirm() {
 
 # Copy the given hook into the project and make the script executable.
 copy_hook() {
-  local hook=$1
+  local hook="$1"
 
-  cp $DIR/hooks/$hook $PROJECT/.git/hooks/$hook
-  chmod +x $PROJECT/.git/hooks/$hook
+  cp "$DIR"/hooks/"$hook" "$PROJECT"/.git/hooks/"$hook"
+  chmod +x "$PROJECT"/.git/hooks/"$hook"
   echo "Copying $hook hook"
 }
 
@@ -39,21 +39,21 @@ error() {
 echo "Installing WP Enforcer..."
 
 # Check that the target Git repository exists
-if [[ ! -d $PROJECT/.git ]]; then
+if [[ ! -d "$PROJECT"/.git ]]; then
   error "No .git directory found in your project, unable to copy Git hooks!"
 fi
 
 # Verify that the hooks/ directory exists within .git/
-if [[ ! -d $PROJECT/.git/hooks ]]; then
+if [[ ! -d "$PROJECT"/.git/hooks ]]; then
   echo "Creating hooks/ directory in Git repository"
-  mkdir $PROJECT/.git/hooks
+  mkdir "$PROJECT"/.git/hooks
 fi
 
 # Copy git hooks, ensuring we're not overwriting anything unexpectedly.
-if [[ -f $PROJECT/.git/hooks/pre-commit ]]; then
+if [[ -f "$PROJECT"/.git/hooks/pre-commit ]]; then
 
   # Diff the files and only prompt if they're different
-  if ! cmp $DIR/hooks/pre-commit $PROJECT/.git/hooks/pre-commit >/dev/null 2>&1; then
+  if ! cmp "$DIR"/hooks/pre-commit "$PROJECT"/.git/hooks/pre-commit >/dev/null 2>&1; then
     echo "A pre-commit hook already exists in $PROJECT/.git/hooks/pre-commit."
     if confirm "Overwrite the existing file?"; then
       copy_hook "pre-commit"
@@ -67,15 +67,15 @@ else
 fi
 
 # Copy the PHP CodeSniffer standards file
-if [[ ! -f $PROJECT/phpcs.xml ]]; then
-  cp $DIR/../phpcs.xml.sample $PROJECT/phpcs.xml
+if [[ ! -f "$PROJECT"/phpcs.xml ]]; then
+  cp "$DIR"/../phpcs.xml.sample "$PROJECT"/phpcs.xml
   echo "Created sample phpcs.xml file"
 fi
 
 # Configure PHP CodeSniffer
-installed_paths="$($BIN/phpcs --config-show | grep "installed_paths:")"
-if [[ $installed_paths != "installed_paths: ../../wp-coding-standards/wpcs" ]]; then
-  $BIN/phpcs --config-set installed_paths ../../wp-coding-standards/wpcs
+installed_paths="$("$BIN"/phpcs --config-show | grep "installed_paths:")"
+if [[ "$installed_paths" != "installed_paths: ../../wp-coding-standards/wpcs" ]]; then
+  "$BIN"/phpcs --config-set installed_paths ../../wp-coding-standards/wpcs
 fi
 
 echo
