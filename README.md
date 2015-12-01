@@ -59,6 +59,7 @@ If you're adding WP Enforcer to a current project, it's recommended to follow th
 ```bash
 $ rm .git/hooks/pre-commit
 ```
+Note: Use `rm` command with care, you can end up deleting your OS (yes it is that powerful). So, check your command multiple times before running the `rm` command. If you are like me, I'd recommend using [Trash CLI](https://github.com/sindresorhus/trash).
 
 This leaves you with a copy of PHP CodeSniffer, a phpcs.xml file, and the WordPress Coding Standards but removes the "don't commit improperly formatted code" restrictions. While still in your clean-up branch, work through the codebase and clean up coding standards, running PHP CodeSniffer manually as needed:
 
