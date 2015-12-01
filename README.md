@@ -81,6 +81,7 @@ Finally, merge your clean-up branch into master, kicking your project's coding s
 
 * Restore explicit reference to `vendor/bin` (previously removed in [#3](https://github.com/stevegrunwell/wp-enforcer/issues/3)) within the pre-commit Git hook ([#11](https://github.com/stevegrunwell/wp-enforcer/issues/11)). Props @leewillis77.
 * Added `--help` and `--version` options to the `wp-enforcer` command for easier usage (and setting us up for more fun options in the future, [#8](https://github.com/stevegrunwell/wp-enforcer/issues/8)). Props @daveross.
+* Fixed major bug wherein PHP_CodeSniffer was complaining about files not containing any code ([#12](https://github.com/stevegrunwell/wp-enforcer/issues/12)).
 
 ### 0.3.0 - November 29, 2015
 
