@@ -80,6 +80,7 @@ Finally, merge your clean-up branch into master, kicking your project's coding s
 ### 0.4.0
 
 * Restore explicit reference to `vendor/bin` (previously removed in [#3](https://github.com/stevegrunwell/wp-enforcer/issues/3)) within the pre-commit Git hook ([#11](https://github.com/stevegrunwell/wp-enforcer/issues/11)). Props @leewillis77.
+* Added `--help` and `--version` options to the `wp-enforcer` command for easier usage (and setting us up for more fun options in the future, [#8](https://github.com/stevegrunwell/wp-enforcer/issues/8)). Props @daveross.
 
 ### 0.3.0 - November 29, 2015
 
