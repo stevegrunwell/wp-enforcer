@@ -6,6 +6,34 @@ readonly BIN="$(cd "$(dirname "$0")" && pwd -P)"
 readonly DIR="$BIN/$(dirname "$(readlink "$0")")"
 readonly PROJECT="$(pwd)"
 
+# Define command-line options here.
+# Follow -o with a comma-separated list of single-character option names.
+# Follow -l with a comma-separated list of long option names.
+# Options may be followed by one colon to indicate they have a required argument
+if ! options=$(getopt -o h -l help -- "$@")
+then
+    # something went wrong, getopt will put out an error message for us
+    exit 1
+fi
+
+while [ $# -gt 0 ]
+do
+    case $1 in
+    -h|--help)
+      echo "Usage: wp-enforcer [OPTION]...";
+      echo "After adding wp-enforcer to a project with Composer, run this script to finish installation.";
+      echo "";
+      echo "  -h, --help    display this help and exit";
+      exit;;
+    # For options with required arguments, an additional shift is required
+    # -o|--option) myarg="$2" ; shift;;
+    (--) shift; break;;
+    (-*) echo "$0: error - unrecognized option $1" 1>&2; exit 1;;
+    (*) break;;
+    esac
+    shift
+done
+
 # Display a confirmation message and return 0/1 based on the result.
 confirm() {
   read -r -p "$1 [Y/n] " response
