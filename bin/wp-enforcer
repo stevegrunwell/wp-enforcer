@@ -20,10 +20,13 @@ while [ $# -gt 0 ]
 do
     case $1 in
     -h|--help)
-      echo "Usage: wp-enforcer [OPTION]...";
-      echo "After adding wp-enforcer to a project with Composer, run this script to finish installation.";
-      echo "";
-      echo "  -h, --help    display this help and exit";
+      echo "USAGE:"
+      echo "  wp-enforcer [--help|-h]"
+      echo ""
+      echo "After adding WP Enforcer to a project with Composer, run this script to finish installation."
+      echo ""
+      echo "OPTIONS:"
+      echo "  --help, -h    Show this help and usage"
       exit;;
     # For options with required arguments, an additional shift is required
     # -o|--option) myarg="$2" ; shift;;
