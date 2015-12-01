@@ -5,12 +5,13 @@
 readonly BIN="$(cd "$(dirname "$0")" && pwd -P)"
 readonly DIR="$BIN/$(dirname "$(readlink "$0")")"
 readonly PROJECT="$(pwd)"
+vip=false
 
 # Define command-line options here.
 # Follow -o with a comma-separated list of single-character option names.
 # Follow -l with a comma-separated list of long option names.
 # Options may be followed by one colon to indicate they have a required argument
-if ! options=$(getopt -o h -l help -- "$@")
+if ! options=$(getopt -o h,v -l help,vip -- "$@")
 then
     # something went wrong, getopt will put out an error message for us
     exit 1
@@ -24,7 +25,11 @@ do
       echo "After adding wp-enforcer to a project with Composer, run this script to finish installation.";
       echo "";
       echo "  -h, --help    display this help and exit";
+      echo "  -v, --vip     install phpcs ruleset for wordpress.com vip";
       exit;;
+    -v|--vip)
+      vip=true;
+      break;;
     # For options with required arguments, an additional shift is required
     # -o|--option) myarg="$2" ; shift;;
     (--) shift; break;;
@@ -96,7 +101,12 @@ fi
 
 # Copy the PHP CodeSniffer standards file
 if [[ ! -f "$PROJECT"/phpcs.xml ]]; then
-  cp "$DIR"/../phpcs.xml.sample "$PROJECT"/phpcs.xml
+  if [ "$vip" = false ]; then
+    sample_file_name="phpcs.xml.sample"
+  else
+    sample_file_name="phpcs-vip.xml.sample"
+  fi
+  cp "$DIR"/../"$sample_file_name" "$PROJECT"/phpcs.xml
   echo "Created sample phpcs.xml file"
 fi
 
