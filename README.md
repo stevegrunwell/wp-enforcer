@@ -59,6 +59,7 @@ If you're adding WP Enforcer to a current project, it's recommended to follow th
 ```bash
 $ rm .git/hooks/pre-commit
 ```
+> **Reminder:** Use the `rm` command with care; double-check everything you're passing to it before you execute, as we'd hate to see you lose valuable repository information (or worse: your operating system).
 
 This leaves you with a copy of PHP CodeSniffer, a phpcs.xml file, and the WordPress Coding Standards but removes the "don't commit improperly formatted code" restrictions. While still in your clean-up branch, work through the codebase and clean up coding standards, running PHP CodeSniffer manually as needed:
 
@@ -75,6 +76,12 @@ $ ./vendor/bin/wp-enforcer
 Finally, merge your clean-up branch into master, kicking your project's coding standards compliance into high gear.
 
 ## Changelog
+
+### 0.4.0
+
+* Restore explicit reference to `vendor/bin` (previously removed in [#3](https://github.com/stevegrunwell/wp-enforcer/issues/3)) within the pre-commit Git hook ([#11](https://github.com/stevegrunwell/wp-enforcer/issues/11)). Props @leewillis77.
+* Added `--help` and `--version` options to the `wp-enforcer` command for easier usage (and setting us up for more fun options in the future, [#8](https://github.com/stevegrunwell/wp-enforcer/issues/8)). Props @daveross.
+* Fixed major bug wherein PHP_CodeSniffer was complaining about files not containing any code ([#12](https://github.com/stevegrunwell/wp-enforcer/issues/12)).
 
 ### 0.3.0 - November 29, 2015
 
