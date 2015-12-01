@@ -11,7 +11,7 @@ vip=false
 # Follow -o with a comma-separated list of single-character option names.
 # Follow -l with a comma-separated list of long option names.
 # Options may be followed by one colon to indicate they have a required argument
-if ! options=$(getopt -o h,v -l help,vip -- "$@")
+if ! options=$(getopt -o h -l help,vip -- "$@")
 then
     # something went wrong, getopt will put out an error message for us
     exit 1
@@ -25,9 +25,9 @@ do
       echo "After adding wp-enforcer to a project with Composer, run this script to finish installation.";
       echo "";
       echo "  -h, --help    display this help and exit";
-      echo "  -v, --vip     install phpcs ruleset for wordpress.com vip";
+      echo "  --vip         install phpcs ruleset for wordpress.com vip";
       exit;;
-    -v|--vip)
+    --vip)
       vip=true;
       break;;
     # For options with required arguments, an additional shift is required
