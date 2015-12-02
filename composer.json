@@ -14,7 +14,7 @@
 		"git hooks",
 		"WordPress",
 		"coding standards",
-		"PHP CodeSniffer"
+		"PHP_CodeSniffer"
 	],
 	"require": {
 		"wp-coding-standards/wpcs": "0.8.0"
