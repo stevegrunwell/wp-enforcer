@@ -11,8 +11,8 @@ else
 	standard=''
 fi
 
-# Run PHP CodeSniffer
-echo "Running PHP CodeSniffer..."
+# Run PHP_CodeSniffer
+echo "Running PHP_CodeSniffer..."
 
 git diff --name-only --cached | xargs vendor/bin/phpcs $standard
 if [ $? != 0 ]

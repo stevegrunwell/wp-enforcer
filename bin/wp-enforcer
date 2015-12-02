@@ -108,7 +108,7 @@ else
   copy_hook "pre-commit"
 fi
 
-# Copy the PHP CodeSniffer standards file
+# Copy the PHP_CodeSniffer standards file
 if [[ ! -f "$PROJECT"/phpcs.xml ]]; then
   if [ "$vip" = false ]; then
     sample_file_name="phpcs.xml.sample"
@@ -119,7 +119,7 @@ if [[ ! -f "$PROJECT"/phpcs.xml ]]; then
   echo "Created sample phpcs.xml file"
 fi
 
-# Configure PHP CodeSniffer
+# Configure PHP_CodeSniffer
 installed_paths="$("$BIN"/phpcs --config-show | grep "installed_paths:")"
 if [[ "$installed_paths" != "installed_paths: ../../wp-coding-standards/wpcs" ]]; then
   "$BIN"/phpcs --config-set installed_paths ../../wp-coding-standards/wpcs

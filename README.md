@@ -5,12 +5,12 @@
 
 When writing for a platform as big as WordPress – especially in a team environment – a consistent set of coding standards is vital. Having multiple developers committing code using a mixture of spaces and tabs, inconsistent formatting, or otherwise varying coding styles can lead to headache-inducing merge conflicts.
 
-There are a number of great tools available to check against established coding standards (namely [PHP CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer)), but setting them up on a project can be a pain. WP Enforcer is designed to make this setup a breeze.
+There are a number of great tools available to check against established coding standards (namely [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer)), but setting them up on a project can be a pain. WP Enforcer is designed to make this setup a breeze.
 
 
 ## How does it work?
 
-WP Enforcer uses [Git Hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) to automatically run PHP CodeSniffer every time a developer tries to make a commit; if the code isn't up-to-snuff, the commit will be rejected and the developer will get a message explaining what needs to be fixed.
+WP Enforcer uses [Git Hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) to automatically run PHP_CodeSniffer every time a developer tries to make a commit; if the code isn't up-to-snuff, the commit will be rejected and the developer will get a message explaining what needs to be fixed.
 
 **Note:** If your project already has messy standards you may not want to make WP Enforcer mandatory until *after* you've cleaned up the codebase or suddenly commits will be quite painful! See [Adding to an Existing Project](#adding-to-an-existing-project) for an easy work-around.
 
@@ -55,9 +55,9 @@ If you need to switch an existing project to the WordPress.com VIP coding standa
 
 ## Configuration
 
-PHP CodeSniffer allows you to [define a custom, default ruleset by creating a phpcs.xml file in your project root](https://github.com/squizlabs/PHP_CodeSniffer/wiki/Advanced-Usage#using-a-default-configuration-file). WP Enforcer will automatically create a phpcs.xml file in your project if one doesn't already exist, but you can edit this to exclude certain files/directories, ignore specific rules, or load additional rulesets.
+PHP_CodeSniffer allows you to [define a custom, default ruleset by creating a phpcs.xml file in your project root](https://github.com/squizlabs/PHP_CodeSniffer/wiki/Advanced-Usage#using-a-default-configuration-file). WP Enforcer will automatically create a phpcs.xml file in your project if one doesn't already exist, but you can edit this to exclude certain files/directories, ignore specific rules, or load additional rulesets.
 
-For a complete list of configuration options, see [the PHP CodeSniffer ruleset.xml standard](https://github.com/squizlabs/PHP_CodeSniffer/wiki/Annotated-ruleset.xml).
+For a complete list of configuration options, see [the PHP_CodeSniffer ruleset.xml standard](https://github.com/squizlabs/PHP_CodeSniffer/wiki/Annotated-ruleset.xml).
 
 
 ## Adding to an Existing Project
@@ -71,7 +71,7 @@ $ rm .git/hooks/pre-commit
 ```
 > **Reminder:** Use the `rm` command with care; double-check everything you're passing to it before you execute, as we'd hate to see you lose valuable repository information (or worse: your operating system).
 
-This leaves you with a copy of PHP CodeSniffer, a phpcs.xml file, and the WordPress Coding Standards but removes the "don't commit improperly formatted code" restrictions. While still in your clean-up branch, work through the codebase and clean up coding standards, running PHP CodeSniffer manually as needed:
+This leaves you with a copy of PHP_CodeSniffer, a phpcs.xml file, and the WordPress Coding Standards but removes the "don't commit improperly formatted code" restrictions. While still in your clean-up branch, work through the codebase and clean up coding standards, running PHP_CodeSniffer manually as needed:
 
 ```bash
 $ ./vendor/bin/phpcs
