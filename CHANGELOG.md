@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 * Restore explicit reference to `vendor/bin` (previously removed in [#3]) within the pre-commit Git hook ([#11]). Props @leewillis77.
 * Added `--help` and `--version` options to the `wp-enforcer` command for easier usage (and setting us up for more fun options in the future, [#8]). Props @daveross.
 * Fixed major bug wherein PHP_CodeSniffer was complaining about files not containing any code ([#12]).
+* Added a `--vip` option to the `wp-enforcer` command to use WordPress.com VIP coding standards ([#7]). Props @daveross.
 * Moved the Change Log out of the README and into CHANGELOG.md ([#19]).
 
 
@@ -34,6 +35,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 [#2]: https://github.com/stevegrunwell/wp-enforcer/issues/2
 [#3]: https://github.com/stevegrunwell/wp-enforcer/issues/3
 [#5]: https://github.com/stevegrunwell/wp-enforcer/issues/5
+[#7]: https://github.com/stevegrunwell/wp-enforcer/issues/7
 [#8]: https://github.com/stevegrunwell/wp-enforcer/issues/8
 [#11]: https://github.com/stevegrunwell/wp-enforcer/issues/11
 [#12]: https://github.com/stevegrunwell/wp-enforcer/issues/12
