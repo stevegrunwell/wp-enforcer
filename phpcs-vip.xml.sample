@@ -11,6 +11,14 @@
 	<exclude-pattern>*/tests/*</exclude-pattern>
 	<exclude-pattern>*/vendor/*</exclude-pattern>
 
-	<rule ref="WordPress-VIP"/>
-	<rule ref="WordPress-Docs"/>
+	<!--
+		Don't get angry about checking files that don't contain code
+		@link https://github.com/stevegrunwell/wp-enforcer/issues/12
+	-->
+	<rule ref="Internal.NoCodeFound">
+		<severity>0</severity>
+	</rule>
+
+	<rule ref="WordPress-VIP" />
+	<rule ref="WordPress-Docs" />
 </ruleset>
