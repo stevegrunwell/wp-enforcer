@@ -1,7 +1,7 @@
 {
 	"name": "stevegrunwell/wp-enforcer",
 	"description": "Git hooks to encourage well-written WordPress.",
-	"version": "0.3.0",
+	"version": "0.4.0",
 	"authors": [
 		{
 			"name": "Steve Grunwell",
@@ -14,7 +14,7 @@
 		"git hooks",
 		"WordPress",
 		"coding standards",
-		"PHP CodeSniffer"
+		"PHP_CodeSniffer"
 	],
 	"require": {
 		"wp-coding-standards/wpcs": "0.8.0"

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
-	Customize the rules WP Enforcer uses by editing this file according to PHP_CodeSniffer's
-	ruleset.xml standard: https://github.com/squizlabs/PHP_CodeSniffer/wiki/Annotated-ruleset.xml
+  Customize the rules WP Enforcer uses by editing this file according to PHP_CodeSniffer's
+  ruleset.xml standard: https://github.com/squizlabs/PHP_CodeSniffer/wiki/Annotated-ruleset.xml
 -->
 <ruleset name="WP-Enforcer">
 	<description>Coding standards from WP Enforcer.</description>
@@ -19,6 +19,6 @@
 		<severity>0</severity>
 	</rule>
 
-	<rule ref="WordPress-Extra" />
+	<rule ref="WordPress-VIP" />
 	<rule ref="WordPress-Docs" />
 </ruleset>

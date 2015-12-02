@@ -2,15 +2,17 @@
 #
 # Copy files for WP Enforcer into the project directory.
 
+readonly VERSION="0.4.0"
 readonly BIN="$(cd "$(dirname "$0")" && pwd -P)"
 readonly DIR="$BIN/$(dirname "$(readlink "$0")")"
 readonly PROJECT="$(pwd)"
+vip=false
 
 # Define command-line options here.
 # Follow -o with a comma-separated list of single-character option names.
 # Follow -l with a comma-separated list of long option names.
 # Options may be followed by one colon to indicate they have a required argument
-if ! options=$(getopt -o h -l help -- "$@")
+if ! options=$(getopt -o h,v -l help,version,vip -- "$@")
 then
     # something went wrong, getopt will put out an error message for us
     exit 1
@@ -20,11 +22,23 @@ while [ $# -gt 0 ]
 do
     case $1 in
     -h|--help)
-      echo "Usage: wp-enforcer [OPTION]...";
-      echo "After adding wp-enforcer to a project with Composer, run this script to finish installation.";
-      echo "";
-      echo "  -h, --help    display this help and exit";
+      echo "After adding WP Enforcer to a project with Composer, run this script to finish installation."
+      echo ""
+      echo "USAGE:"
+      echo "  wp-enforcer [options]"
+      echo ""
+      echo "OPTIONS:"
+      echo "  --help, -h       Show this help and usage"
+      echo "  --version, -v    Show the current version of WP Enforcer"
+      echo "  --vip            Configure the project to use the WordPress.com VIP coding standards"
+      echo ""
       exit;;
+    -v|--version)
+      echo "$VERSION"
+      exit;;
+    --vip)
+      vip=true;
+      break;;
     # For options with required arguments, an additional shift is required
     # -o|--option) myarg="$2" ; shift;;
     (--) shift; break;;
@@ -94,13 +108,18 @@ else
   copy_hook "pre-commit"
 fi
 
-# Copy the PHP CodeSniffer standards file
+# Copy the PHP_CodeSniffer standards file
 if [[ ! -f "$PROJECT"/phpcs.xml ]]; then
-  cp "$DIR"/../phpcs.xml.sample "$PROJECT"/phpcs.xml
+  if [ "$vip" = false ]; then
+    sample_file_name="phpcs.xml.sample"
+  else
+    sample_file_name="phpcs-vip.xml.sample"
+  fi
+  cp "$DIR"/../"$sample_file_name" "$PROJECT"/phpcs.xml
   echo "Created sample phpcs.xml file"
 fi
 
-# Configure PHP CodeSniffer
+# Configure PHP_CodeSniffer
 installed_paths="$("$BIN"/phpcs --config-show | grep "installed_paths:")"
 if [[ "$installed_paths" != "installed_paths: ../../wp-coding-standards/wpcs" ]]; then
   "$BIN"/phpcs --config-set installed_paths ../../wp-coding-standards/wpcs
