@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [0.4.0] - Unreleased
+## [0.4.0] - 2015-12-02
 
 * Restore explicit reference to `vendor/bin` (previously removed in [#3]) within the pre-commit Git hook ([#11]). Props @leewillis77.
 * Added `--help` and `--version` options to the `wp-enforcer` command for easier usage (and setting us up for more fun options in the future, [#8]). Props @daveross.
