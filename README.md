@@ -42,6 +42,16 @@ If you'd like to require WP Enforcer for all developers on your project, you can
 ]
 ```
 
+### Writing for WordPress.com VIP
+
+WP Enforcer includes built-in support for the [WordPress.com VIP coding standards](https://vip.wordpress.com/documentation/developers-guide-to-wordpress-com-vip/), simply add `--vip` when you run the `wp-enforcer` command (including in the post-install and post-update commands).
+
+If you need to switch an existing project to the WordPress.com VIP coding standards, you can add the following to your project's phpcs.xml file (replacing "WordPress-Extra", if it's set):
+
+```xml
+<rule ref="WordPress-VIP" />
+```
+
 
 ## Configuration
 
