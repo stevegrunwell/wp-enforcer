@@ -29,10 +29,10 @@ do
       echo "  wp-enforcer [options]"
       echo ""
       echo "OPTIONS:"
-      echo "  --help, -h          Show this help and usage"
-      echo "  --version, -v       Show the current version of WP Enforcer"
-      echo "  --vip               Configure the project to use the WordPress.com VIP coding standards"
-      echo "  --customruleset, -c Configure the project to use a custom PHPCS ruleset file"
+      echo "  --help, -h               Show this help and usage"
+      echo "  --version, -v            Show the current version of WP Enforcer"
+      echo "  --vip                    Configure the project to use the WordPress.com VIP coding standards"
+      echo "  --customruleset=FILE, -c Configure the project to use a custom PHPCS ruleset file"
       echo ""
       exit;;
     -v|--version)
