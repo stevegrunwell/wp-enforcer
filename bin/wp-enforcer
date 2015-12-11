@@ -13,7 +13,7 @@ ruleset=false
 # Follow -o with a comma-separated list of single-character option names.
 # Follow -l with a comma-separated list of long option names.
 # Options may be followed by one colon to indicate they have a required argument
-if ! options=$(getopt -o h,v,c -l help,version,vip,customruleset -- "$@")
+if ! options=$(getopt -o h,v,c -l help,version,vip,customruleset: -- "$@")
 then
     # something went wrong, getopt will put out an error message for us
     exit 1
