@@ -9,6 +9,15 @@ readonly PROJECT="$(pwd)"
 vip=false
 ruleset=false
 
+# Trigger an error and exit, but also tell users how they can re-run the script.
+error() {
+  echo
+  echo "Error: $1" >&2
+  echo "You may re-run this setup at any time by running $DIR/wp-enforcer"
+  echo
+  exit 1;
+}
+
 # Define command-line options here.
 # Follow -o with a comma-separated list of single-character option names.
 # Follow -l with a comma-separated list of long option names.
@@ -39,19 +48,22 @@ do
       echo "$VERSION"
       exit;;
     --vip)
-      vip=true;
-      break;;
+      vip=true;;
     -c|--customruleset)
-      ruleset="$2" ; shift;
-      break;;
+      ruleset="$2" ; shift;;
     # For options with required arguments, an additional shift is required
     # -o|--option) myarg="$2" ; shift;;
-    (--) shift; break;;
+    (--) shift;;
     (-*) echo "$0: error - unrecognized option $1" 1>&2; exit 1;;
-    (*) break;;
+    (*) shift;;
     esac
     shift
 done
+
+# --vip and --customruleset aren't compatible
+if [[ "$ruleset" != false && "$vip" = true ]]; then
+  error "You can't use both --vip and --customruleset"
+fi
 
 # Display a confirmation message and return 0/1 based on the result.
 confirm() {
@@ -72,15 +84,6 @@ copy_hook() {
   cp "$DIR"/hooks/"$hook" "$PROJECT"/.git/hooks/"$hook"
   chmod +x "$PROJECT"/.git/hooks/"$hook"
   echo "Copying $hook hook"
-}
-
-# Trigger an error and exit, but also tell users how they can re-run the script.
-error() {
-  echo
-  echo "Error: $1" >&2
-  echo "You may re-run this setup at any time by running $DIR/wp-enforcer"
-  echo
-  exit 1;
 }
 
 echo "Installing WP Enforcer..."
