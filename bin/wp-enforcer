@@ -7,12 +7,13 @@ readonly BIN="$(cd "$(dirname "$0")" && pwd -P)"
 readonly DIR="$BIN/$(dirname "$(readlink "$0")")"
 readonly PROJECT="$(pwd)"
 vip=false
+ruleset=false
 
 # Define command-line options here.
 # Follow -o with a comma-separated list of single-character option names.
 # Follow -l with a comma-separated list of long option names.
 # Options may be followed by one colon to indicate they have a required argument
-if ! options=$(getopt -o h,v -l help,version,vip -- "$@")
+if ! options=$(getopt -o h,v,c -l help,version,vip,customruleset -- "$@")
 then
     # something went wrong, getopt will put out an error message for us
     exit 1
@@ -28,9 +29,10 @@ do
       echo "  wp-enforcer [options]"
       echo ""
       echo "OPTIONS:"
-      echo "  --help, -h       Show this help and usage"
-      echo "  --version, -v    Show the current version of WP Enforcer"
-      echo "  --vip            Configure the project to use the WordPress.com VIP coding standards"
+      echo "  --help, -h          Show this help and usage"
+      echo "  --version, -v       Show the current version of WP Enforcer"
+      echo "  --vip               Configure the project to use the WordPress.com VIP coding standards"
+      echo "  --customruleset, -c Configure the project to use a custom PHPCS ruleset file"
       echo ""
       exit;;
     -v|--version)
@@ -38,6 +40,9 @@ do
       exit;;
     --vip)
       vip=true;
+      break;;
+    -c|--customruleset)
+      ruleset="$2" ; shift;
       break;;
     # For options with required arguments, an additional shift is required
     # -o|--option) myarg="$2" ; shift;;
@@ -109,7 +114,7 @@ else
 fi
 
 # Copy the PHP_CodeSniffer standards file
-if [[ ! -f "$PROJECT"/phpcs.xml ]]; then
+if [[ ! -f "$PROJECT"/phpcs.xml && "$ruleset" = false ]]; then
   if [ "$vip" = false ]; then
     sample_file_name="phpcs.xml.sample"
   else
@@ -122,7 +127,12 @@ fi
 # Configure PHP_CodeSniffer
 installed_paths="$("$BIN"/phpcs --config-show | grep "installed_paths:")"
 if [[ "$installed_paths" != "installed_paths: ../../wp-coding-standards/wpcs" ]]; then
-  "$BIN"/phpcs --config-set installed_paths ../../wp-coding-standards/wpcs
+    "$BIN"/phpcs --config-set installed_paths ../../wp-coding-standards/wpcs
+fi
+
+# Support custom rulesets
+if [[ "$ruleset" != false ]]; then
+  "$BIN"/phpcs --config-set default_standard "$ruleset"
 fi
 
 echo
