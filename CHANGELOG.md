@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.4.1] - 2015-12-21
+
+* Apply a `--diff-filter` in the pre-commit hook to ensure PHP_CodeSniffer doesn't attempt to tokenize files that have been deleted ([#29]). Props @JoeyBlake.
+
 ## [0.4.0] - 2015-12-02
 
 * Restore explicit reference to `vendor/bin` (previously removed in [#3]) within the pre-commit Git hook ([#11]). Props @leewillis77.
@@ -28,7 +32,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 * Initial public release.
 
-[0.4.0]: https://github.com/stevegrunwell/wp-enforcer/compare/v0.3.0...HEAD
+[0.4.1]: https://github.com/stevegrunwell/wp-enforcer/compare/v0.4.0...master
+[0.4.0]: https://github.com/stevegrunwell/wp-enforcer/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/stevegrunwell/wp-enforcer/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/stevegrunwell/wp-enforcer/compare/v0.1.0...v0.2.0
 [#1]: https://github.com/stevegrunwell/wp-enforcer/issues/1
@@ -40,3 +45,4 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 [#11]: https://github.com/stevegrunwell/wp-enforcer/issues/11
 [#12]: https://github.com/stevegrunwell/wp-enforcer/issues/12
 [#19]: https://github.com/stevegrunwell/wp-enforcer/issues/19
+[#29]: https://github.com/stevegrunwell/wp-enforcer/issues/29
