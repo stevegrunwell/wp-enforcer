@@ -38,10 +38,10 @@ do
       echo "  wp-enforcer [options]"
       echo ""
       echo "OPTIONS:"
-      echo "  --help, -h            Show this help and usage"
-      echo "  --version, -v         Show the current version of WP Enforcer"
-      echo "  --vip                 Configure the project to use the WordPress.com VIP coding standards"
-      echo "  --customruleset=FILE  Configure the project to use a custom PHPCS ruleset file"
+      echo "  --help, -h      Show this help and usage"
+      echo "  --version, -v   Show the current version of WP Enforcer"
+      echo "  --vip           Configure the project to use the WordPress.com VIP coding standards"
+      echo "  --ruleset=FILE  Configure the project to use a custom PHPCS ruleset file"
       echo ""
       exit;;
     -v|--version)
@@ -49,7 +49,7 @@ do
       exit;;
     --vip)
       vip=true;;
-    --customruleset)
+    --ruleset)
       ruleset="$2" ; shift;;
     # For options with required arguments, an additional shift is required
     # -o|--option) myarg="$2" ; shift;;
