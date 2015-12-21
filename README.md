@@ -54,7 +54,7 @@ If you need to switch an existing project to the WordPress.com VIP coding standa
 
 ### Using a custom ruleset
 
-If you want to use a custom XML configuration file with PHPCS, add `--customruleset=[FILE]` when you run the `wp-enforcer` command.
+If you want to use a custom XML configuration file with PHPCS, add `--ruleset=[FILE]` when you run the `wp-enforcer` command.
 
 ## Configuration
 

@@ -22,7 +22,7 @@ error() {
 # Follow -o with a comma-separated list of single-character option names.
 # Follow -l with a comma-separated list of long option names.
 # Options may be followed by one colon to indicate they have a required argument
-if ! options=$(getopt -o h,v,c -l help,version,vip,customruleset: -- "$@")
+if ! options=$(getopt -o h,v -l help,version,vip,ruleset: -- "$@")
 then
     # something went wrong, getopt will put out an error message for us
     exit 1
@@ -60,9 +60,9 @@ do
     shift
 done
 
-# --vip and --customruleset aren't compatible
+# --vip and --ruleset aren't compatible
 if [[ "$ruleset" != false && "$vip" = true ]]; then
-  error "You can't use both --vip and --customruleset"
+  error "You can't use both --vip and --ruleset"
 fi
 
 # Display a confirmation message and return 0/1 based on the result.
