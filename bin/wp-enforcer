@@ -3,8 +3,8 @@
 # Copy files for WP Enforcer into the project directory.
 
 readonly VERSION="0.4.0"
-readonly BIN="$(cd "$(dirname "$0")" && pwd -P)"
-readonly DIR="$BIN/$(dirname "$(readlink "$0")")"
+readonly BIN="$(cd "$(composer config --absolute bin-dir)" && pwd -P)"
+readonly DIR="$(cd "$(composer config --absolute vendor-dir)" && pwd -P)/stevegrunwell/wp-enforcer/bin"
 readonly PROJECT="$(pwd)"
 vip=false
 ruleset=false
