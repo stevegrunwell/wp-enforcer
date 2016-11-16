@@ -1,36 +1,36 @@
 #!/usr/bin/env bash
 #
 # Copy files for WP Enforcer into the project directory.
+#
+# @package WP Enforcer
 
 readonly VERSION="0.4.0"
 readonly BIN="$(cd "$(dirname "$0")" && pwd -P)"
-readonly DIR="$BIN/$(dirname "$(readlink "$0")")"
+readonly DIR="${BIN}/$(dirname "$(readlink "$0")")"
 readonly PROJECT="$(pwd)"
-vip=false
-ruleset=false
+vip="false"
+ruleset="false"
 
 # Trigger an error and exit, but also tell users how they can re-run the script.
 error() {
   echo
-  echo "Error: $1" >&2
+  echo "Error: $1" 1>&2
   echo "You may re-run this setup at any time by running $DIR/wp-enforcer"
   echo
-  exit 1;
+  exit 1
 }
 
 # Define command-line options here.
 # Follow -o with a comma-separated list of single-character option names.
 # Follow -l with a comma-separated list of long option names.
 # Options may be followed by one colon to indicate they have a required argument
-if ! options=$(getopt -o h,v -l help,version,vip,ruleset: -- "$@")
-then
-    # something went wrong, getopt will put out an error message for us
-    exit 1
+if ! getopt -o h,v -l help,version,vip,ruleset: -- "$@" > /dev/null 2>&1; then
+  # Something went wrong, getopt will put out an error message for us
+  exit 1
 fi
 
-while [ $# -gt 0 ]
-do
-    case $1 in
+while [ $# -gt 0 ]; do
+  case "$1" in
     -h|--help)
       echo "After adding WP Enforcer to a project with Composer, run this script to finish installation."
       echo ""
@@ -40,37 +40,49 @@ do
       echo "OPTIONS:"
       echo "  --help, -h      Show this help and usage"
       echo "  --version, -v   Show the current version of WP Enforcer"
-      echo "  --vip           Configure the project to use the WordPress.com VIP coding standards"
+      echo "  --vip         Configure the project to use the WordPress.com VIP coding standards"
       echo "  --ruleset=FILE  Configure the project to use a custom PHPCS ruleset file"
       echo ""
-      exit;;
+      exit
+      ;;
     -v|--version)
       echo "$VERSION"
-      exit;;
+      exit 0
+      ;;
     --vip)
-      vip=true;;
+      vip="true"
+      ;;
     --ruleset)
-      ruleset="$2" ; shift;;
+      ruleset="$2"
+      shift
+      ;;
     # For options with required arguments, an additional shift is required
     # -o|--option) myarg="$2" ; shift;;
-    (--) shift;;
-    (-*) echo "$0: error - unrecognized option $1" 1>&2; exit 1;;
-    (*) shift;;
-    esac
-    shift
+    (--)
+      shift
+      ;;
+    (-*)
+      echo "$0: error - unrecognized option $1" 1>&2
+      exit 1
+      ;;
+    (*)
+      shift
+      ;;
+  esac
+  shift
 done
 
 # --vip and --ruleset aren't compatible
-if [[ "$ruleset" != false && "$vip" = true ]]; then
+if [[ "$ruleset" != false && "$vip" == true ]]; then
   error "You can't use both --vip and --ruleset"
 fi
 
 # Display a confirmation message and return 0/1 based on the result.
 confirm() {
   read -r -p "$1 [Y/n] " response
-  response=$(echo "$response" | tr '[:upper:]' '[:lower:]')
+  response="$(echo "$response" | tr "[:upper:]" "[:lower:]")"
 
-  if [[ "$response" == "y" ]]; then
+  if [[ "$response" == y ]]; then
     return 0
   fi
 
@@ -81,63 +93,63 @@ confirm() {
 copy_hook() {
   local hook="$1"
 
-  cp "$DIR"/hooks/"$hook" "$PROJECT"/.git/hooks/"$hook"
-  chmod +x "$PROJECT"/.git/hooks/"$hook"
-  echo "Copying $hook hook"
+  cp "${DIR}/hooks/${hook}" "${PROJECT}/.git/hooks/${hook}"
+  chmod +x "${PROJECT}/.git/hooks/${hook}"
+  echo "Copying ${hook} hook"
 }
 
 echo "Installing WP Enforcer..."
 
 # Check that the target Git repository exists
-if [[ ! -d "$PROJECT"/.git ]]; then
-  error "No .git directory found in your project, unable to copy Git hooks!"
+if [[ ! -d "${PROJECT}/.git" ]]; then
+  error 'No .git directory found in your project, unable to copy Git hooks!'
 fi
 
 # Verify that the hooks/ directory exists within .git/
-if [[ ! -d "$PROJECT"/.git/hooks ]]; then
+if [[ ! -d "${PROJECT}/.git/hooks" ]]; then
   echo "Creating hooks/ directory in Git repository"
-  mkdir "$PROJECT"/.git/hooks
+  mkdir "${PROJECT}/.git/hooks"
 fi
 
 # Copy git hooks, ensuring we're not overwriting anything unexpectedly.
-if [[ -f "$PROJECT"/.git/hooks/pre-commit ]]; then
+if [[ -f "${PROJECT}/.git/hooks/pre-commit" ]]; then
 
   # Diff the files and only prompt if they're different
-  if ! cmp "$DIR"/hooks/pre-commit "$PROJECT"/.git/hooks/pre-commit >/dev/null 2>&1; then
-    echo "A pre-commit hook already exists in $PROJECT/.git/hooks/pre-commit."
+  if ! cmp "${DIR}/hooks/pre-commit" "${PROJECT}/.git/hooks/pre-commit" > /dev/null 2>&1; then
+    echo "A pre-commit hook already exists in ${PROJECT}/.git/hooks/pre-commit."
     if confirm "Overwrite the existing file?"; then
       copy_hook "pre-commit"
     fi
   else
     echo "pre-commit hook already exists, skipping"
   fi
-
 else
   copy_hook "pre-commit"
 fi
 
 # Copy the PHP_CodeSniffer standards file
-if [[ ! -f "$PROJECT"/phpcs.xml && "$ruleset" = false ]]; then
+if [[ ! -f "${PROJECT}/phpcs.xml" && "$ruleset" = false ]]; then
   if [ "$vip" = false ]; then
     sample_file_name="phpcs.xml.sample"
   else
     sample_file_name="phpcs-vip.xml.sample"
   fi
-  cp "$DIR"/../"$sample_file_name" "$PROJECT"/phpcs.xml
+  cp "${DIR}/../${sample_file_name}" "${PROJECT}/phpcs.xml"
   echo "Created sample phpcs.xml file"
 fi
 
 # Configure PHP_CodeSniffer
-installed_paths="$("$BIN"/phpcs --config-show | grep "installed_paths:")"
+installed_paths="$("${BIN}/phpcs" --config-show | grep "installed_paths:")"
 if [[ "$installed_paths" != "installed_paths: ../../wp-coding-standards/wpcs" ]]; then
-    "$BIN"/phpcs --config-set installed_paths ../../wp-coding-standards/wpcs
+  "${BIN}/phpcs" --config-set installed_paths "../../wp-coding-standards/wpcs"
 fi
 
 # Support custom rulesets
 if [[ "$ruleset" != false ]]; then
-  "$BIN"/phpcs --config-set default_standard "$ruleset"
+  "${BIN}/phpcs" --config-set default_standard "$ruleset"
 fi
 
 echo
-echo "WP Enforcer installed successfully!"
+echo 'WP Enforcer installed successfully!'
+
 exit 0
