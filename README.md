@@ -52,6 +52,9 @@ If you need to switch an existing project to the WordPress.com VIP coding standa
 <rule ref="WordPress-VIP" />
 ```
 
+### Using a custom ruleset
+
+If you want to use a custom XML configuration file with PHPCS, add `--ruleset=[FILE]` when you run the `wp-enforcer` command.
 
 ## Configuration
 
