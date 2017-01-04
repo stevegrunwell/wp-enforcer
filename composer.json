@@ -1,7 +1,6 @@
 {
 	"name": "stevegrunwell/wp-enforcer",
 	"description": "Git hooks to encourage well-written WordPress.",
-	"version": "0.4.0",
 	"authors": [
 		{
 			"name": "Steve Grunwell",
@@ -9,6 +8,10 @@
 			"homepage": "https://stevegrunwell.com"
 		}
 	],
+	"support": {
+			"source": "https://github.com/stevegrunwell/wp-enforcer",
+			"issues": "https://github.com/stevegrunwell/wp-enforcer/issues"
+	},
 	"license": "MIT",
 	"keywords": [
 		"git hooks",
@@ -17,7 +20,7 @@
 		"PHP_CodeSniffer"
 	],
 	"require": {
-		"wp-coding-standards/wpcs": "0.8.0"
+		"wp-coding-standards/wpcs": "^0.10.0"
 	},
 	"bin": [
 		"bin/wp-enforcer"

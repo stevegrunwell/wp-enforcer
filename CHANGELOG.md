@@ -3,9 +3,17 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+
+## [Unreleased]
+
+* Don't lock [wp-coding-standards/wpcs](https://github.com/wp-coding-standards/wpcs) to a single version.
+* Remove the explicit package version in `composer.json`, add GitHub URLs.
+
+
 ## [0.4.1] - 2015-12-21
 
 * Apply a `--diff-filter` in the pre-commit hook to ensure PHP_CodeSniffer doesn't attempt to tokenize files that have been deleted ([#29]). Props @JoeyBlake.
+
 
 ## [0.4.0] - 2015-12-02
 
@@ -32,6 +40,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 * Initial public release.
 
+
+[Unreleased]: https://github.com/stevegrunwell/wp-enforcer/compare/develop...master
 [0.4.1]: https://github.com/stevegrunwell/wp-enforcer/compare/v0.4.0...master
 [0.4.0]: https://github.com/stevegrunwell/wp-enforcer/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/stevegrunwell/wp-enforcer/compare/v0.2.0...v0.3.0
