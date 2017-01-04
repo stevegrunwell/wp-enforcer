@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+* Don't lock [wp-coding-standards/wpcs](https://github.com/wp-coding-standards/wpcs) to a single version.
 * Remove the explicit package version in `composer.json`, add GitHub URLs.
 
 
