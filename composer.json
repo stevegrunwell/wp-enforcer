@@ -8,6 +8,10 @@
 			"homepage": "https://stevegrunwell.com"
 		}
 	],
+	"support": {
+			"source": "https://github.com/stevegrunwell/wp-enforcer",
+			"issues": "https://github.com/stevegrunwell/wp-enforcer/issues"
+	},
 	"license": "MIT",
 	"keywords": [
 		"git hooks",

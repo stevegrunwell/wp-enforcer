@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-* Remove the explicit package version in `composer.json`
+* Remove the explicit package version in `composer.json`, add GitHub URLs.
 
 
 ## [0.4.1] - 2015-12-21
