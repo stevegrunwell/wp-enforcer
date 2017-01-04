@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [Unreleased]
+## [0.4.2] - 2017-01-04
 
 * Don't lock [wp-coding-standards/wpcs](https://github.com/wp-coding-standards/wpcs) to a single version.
 * Remove the explicit package version in `composer.json`, add GitHub URLs.
@@ -42,7 +42,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 [Unreleased]: https://github.com/stevegrunwell/wp-enforcer/compare/develop...master
-[0.4.1]: https://github.com/stevegrunwell/wp-enforcer/compare/v0.4.0...master
+[0.4.2]: https://github.com/stevegrunwell/wp-enforcer/compare/v0.4.1...master
+[0.4.1]: https://github.com/stevegrunwell/wp-enforcer/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/stevegrunwell/wp-enforcer/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/stevegrunwell/wp-enforcer/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/stevegrunwell/wp-enforcer/compare/v0.1.0...v0.2.0
