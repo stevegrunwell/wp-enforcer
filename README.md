@@ -79,6 +79,11 @@ This leaves you with a copy of PHP_CodeSniffer, a phpcs.xml file, and the WordPr
 ```bash
 $ ./vendor/bin/phpcs
 ```
+You may also run PHP Code Beautifier and Fixer, which can fix many common indentation and formatting issues automatically, using the PHP Code Beautifier and Fixer (phpcbf) command:
+
+```bash
+$ ./vendor/bin/phpcbf
+``
 
 Once CodeSniffer comes back clean, re-run the WP Enforcer installation script to restore the Git hook, forcing all future commits to be clean:
 
