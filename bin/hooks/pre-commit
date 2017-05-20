@@ -14,9 +14,8 @@ fi
 # Run PHP_CodeSniffer
 echo "Running PHP_CodeSniffer..."
 
-git diff --name-only --cached --diff-filter=ACMRTUXB | xargs vendor/bin/phpcs $standard
-if [ $? != 0 ]
-then
+composer run lint:plugin
+if [ $? != 0 ]; then
 	echo "Please fix coding standards errors before committing"
 	exit 1
 fi
