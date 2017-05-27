@@ -20,7 +20,7 @@ WP Enforcer uses [Git Hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-
 The easiest way to install WP Enforcer is via Composer:
 
 ```bash
-$ composer require stevegrunwell/wp-enforcer
+$ composer require stevegrunwell/wp-enforcer --dev
 ```
 
 This will add WP Enforcer to your composer.json file and install the WP Enforcer package.
