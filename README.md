@@ -23,7 +23,7 @@ The easiest way to install WP Enforcer is via Composer:
 $ composer require --dev stevegrunwell/wp-enforcer
 ```
 
-This will add WP Enforcer to your composer.json file and install the WP Enforcer package.
+This will add WP Enforcer to your `composer.json` file and install the WP Enforcer package.
 
 Next, you'll need to run the WP Enforcer installation script to copy the Git hooks into your local repository:
 
@@ -57,9 +57,11 @@ If you need to switch an existing project to the WordPress.com VIP coding standa
 <rule ref="WordPress-VIP" />
 ```
 
+
 ### Using a custom ruleset
 
-If you want to use a custom XML configuration file with PHPCS, add `--ruleset=[FILE]` when you run the `wp-enforcer` command.
+If you want to use a custom XML configuration file with PHP_CodeSniffer, add `--ruleset=[FILE]` when you run the `wp-enforcer` command.
+
 
 ## Configuration
 
@@ -84,6 +86,7 @@ This leaves you with a copy of PHP_CodeSniffer, a phpcs.xml file, and the WordPr
 ```bash
 $ ./vendor/bin/phpcs
 ```
+
 You may also run PHP Code Beautifier and Fixer, which can fix many common indentation and formatting issues automatically, using the PHP Code Beautifier and Fixer (phpcbf) command:
 
 ```bash
