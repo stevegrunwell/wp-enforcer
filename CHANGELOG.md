@@ -6,7 +6,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-* Allow any version of [wp-coding-standards/wpcs](https://github.com/wp-coding-standards/wpcs), avoiding conflicts with packages that use older versions.
+* Allow any version of [wp-coding-standards/wpcs](https://github.com/wp-coding-standards/wpcs), avoiding conflicts with packages that use older versions ([#37]).
+* Clarify placement of scripts within `composer.json` ([#41]).
+* Exclude `phpcs.xml` from being checked by PHP_CodeSniffer ([#27]).
 
 
 ## [0.4.2] - 2017-01-04
@@ -61,4 +63,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 [#11]: https://github.com/stevegrunwell/wp-enforcer/issues/11
 [#12]: https://github.com/stevegrunwell/wp-enforcer/issues/12
 [#19]: https://github.com/stevegrunwell/wp-enforcer/issues/19
+[#27]: https://github.com/stevegrunwell/wp-enforcer/issues/27
 [#29]: https://github.com/stevegrunwell/wp-enforcer/issues/29
+[#37]: https://github.com/stevegrunwell/wp-enforcer/issues/37
+[#41]: https://github.com/stevegrunwell/wp-enforcer/issues/41
