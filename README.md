@@ -20,10 +20,10 @@ WP Enforcer uses [Git Hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-
 The easiest way to install WP Enforcer is via Composer:
 
 ```bash
-$ composer require stevegrunwell/wp-enforcer
+$ composer require --dev stevegrunwell/wp-enforcer
 ```
 
-This will add WP Enforcer to your composer.json file and install the WP Enforcer package.
+This will add WP Enforcer to your `composer.json` file and install the WP Enforcer package.
 
 Next, you'll need to run the WP Enforcer installation script to copy the Git hooks into your local repository:
 
@@ -31,16 +31,21 @@ Next, you'll need to run the WP Enforcer installation script to copy the Git hoo
 $ ./vendor/bin/wp-enforcer
 ```
 
-If you'd like to require WP Enforcer for all developers on your project, you can add the following commands to your composer.json file to have WP Enforcer automatically set up Git hooks on `composer install` and `composer update`:
+If you'd like to require WP Enforcer for all developers on your project, you can add the following scripts to your `composer.json` file to have WP Enforcer automatically set up Git hooks on `composer install` and `composer update` (for more information, please see [Composer Scripts](https://getcomposer.org/doc/articles/scripts.md)):
 
 ```json
-"post-install-cmd": [
-	"wp-enforcer"
-],
-"post-update-cmd": [
-	"wp-enforcer"
-]
+{
+	"scripts": {
+		"post-install-cmd": [
+			"wp-enforcer"
+		],
+		"post-update-cmd": [
+			"wp-enforcer"
+		]
+	}
+}
 ```
+
 
 ### Writing for WordPress.com VIP
 
@@ -51,6 +56,11 @@ If you need to switch an existing project to the WordPress.com VIP coding standa
 ```xml
 <rule ref="WordPress-VIP" />
 ```
+
+
+### Using a custom ruleset
+
+If you want to use a custom XML configuration file with PHP_CodeSniffer, add `--ruleset=[FILE]` when you run the `wp-enforcer` command.
 
 
 ## Configuration
@@ -77,6 +87,12 @@ This leaves you with a copy of PHP_CodeSniffer, a phpcs.xml file, and the WordPr
 $ ./vendor/bin/phpcs
 ```
 
+You may also run PHP Code Beautifier and Fixer, which can fix many common indentation and formatting issues automatically, using the PHP Code Beautifier and Fixer (phpcbf) command:
+
+```bash
+$ ./vendor/bin/phpcbf
+```
+
 Once CodeSniffer comes back clean, re-run the WP Enforcer installation script to restore the Git hook, forcing all future commits to be clean:
 
 ```bash
@@ -84,3 +100,10 @@ $ ./vendor/bin/wp-enforcer
 ```
 
 Finally, merge your clean-up branch into master, kicking your project's coding standards compliance into high gear.
+
+
+## Bypassing WP Enforcer
+
+If it's necessary to bypass WP Enforcer's sniffs for a particular commit (for instance, you're committing small chunks of a file that has older, non-compliant code) you may do so by using [`git commit --no-verify`](https://git-scm.com/docs/git-commit#git-commit--n).
+
+It's recommended that WP Enforcer is only bypassed when making changes in legacy files that simply haven't been cleaned up yet. For more on integrating WP Enforcer with legacy projects, please see [Adding to an Existing Project](#adding-to-an-existing-project).

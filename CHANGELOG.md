@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [0.5.0] - 2017-05-28
+
+* Allow any version of [wp-coding-standards/wpcs](https://github.com/wp-coding-standards/wpcs), avoiding conflicts with packages that use older versions ([#37]).
+* Clarify placement of scripts within `composer.json` ([#41]).
+* Exclude `phpcs.xml` from being checked by PHP_CodeSniffer ([#27]).
+
+
 ## [0.4.2] - 2017-01-04
 
 * Don't lock [wp-coding-standards/wpcs](https://github.com/wp-coding-standards/wpcs) to a single version.
@@ -42,7 +49,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 [Unreleased]: https://github.com/stevegrunwell/wp-enforcer/compare/develop...master
-[0.4.2]: https://github.com/stevegrunwell/wp-enforcer/compare/v0.4.1...master
+[0.4.2]: https://github.com/stevegrunwell/wp-enforcer/compare/v0.5.0...master
+[0.4.2]: https://github.com/stevegrunwell/wp-enforcer/compare/v0.4.1...v0.4.2
 [0.4.1]: https://github.com/stevegrunwell/wp-enforcer/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/stevegrunwell/wp-enforcer/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/stevegrunwell/wp-enforcer/compare/v0.2.0...v0.3.0
@@ -56,4 +64,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 [#11]: https://github.com/stevegrunwell/wp-enforcer/issues/11
 [#12]: https://github.com/stevegrunwell/wp-enforcer/issues/12
 [#19]: https://github.com/stevegrunwell/wp-enforcer/issues/19
+[#27]: https://github.com/stevegrunwell/wp-enforcer/issues/27
 [#29]: https://github.com/stevegrunwell/wp-enforcer/issues/29
+[#37]: https://github.com/stevegrunwell/wp-enforcer/issues/37
+[#41]: https://github.com/stevegrunwell/wp-enforcer/issues/41
