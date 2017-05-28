@@ -20,7 +20,7 @@
 		"PHP_CodeSniffer"
 	],
 	"require": {
-		"wp-coding-standards/wpcs": "^0.10.0"
+		"wp-coding-standards/wpcs": "*"
 	},
 	"bin": [
 		"bin/wp-enforcer"
