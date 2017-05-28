@@ -100,3 +100,10 @@ $ ./vendor/bin/wp-enforcer
 ```
 
 Finally, merge your clean-up branch into master, kicking your project's coding standards compliance into high gear.
+
+
+## Bypassing WP Enforcer
+
+If it's necessary to bypass WP Enforcer's sniffs for a particular commit (for instance, you're committing small chunks of a file that has older, non-compliant code) you may do so by using [`git commit --no-verify`](https://git-scm.com/docs/git-commit#git-commit--n).
+
+It's recommended that WP Enforcer is only bypassed when making changes in legacy files that simply haven't been cleaned up yet. For more on integrating WP Enforcer with legacy projects, please see [Adding to an Existing Project](#adding-to-an-existing-project).
