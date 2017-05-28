@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [Unreleased]
+
+* Allow any version of [wp-coding-standards/wpcs](https://github.com/wp-coding-standards/wpcs), avoiding conflicts with packages that use older versions.
+
+
 ## [0.4.2] - 2017-01-04
 
 * Don't lock [wp-coding-standards/wpcs](https://github.com/wp-coding-standards/wpcs) to a single version.
