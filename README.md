@@ -31,16 +31,21 @@ Next, you'll need to run the WP Enforcer installation script to copy the Git hoo
 $ ./vendor/bin/wp-enforcer
 ```
 
-If you'd like to require WP Enforcer for all developers on your project, you can add the following commands to your composer.json file to have WP Enforcer automatically set up Git hooks on `composer install` and `composer update`:
+If you'd like to require WP Enforcer for all developers on your project, you can add the following scripts to your `composer.json` file to have WP Enforcer automatically set up Git hooks on `composer install` and `composer update` (for more information, please see [Composer Scripts](https://getcomposer.org/doc/articles/scripts.md)):
 
 ```json
-"post-install-cmd": [
-	"wp-enforcer"
-],
-"post-update-cmd": [
-	"wp-enforcer"
-]
+{
+	"scripts": {
+		"post-install-cmd": [
+			"wp-enforcer"
+		],
+		"post-update-cmd": [
+			"wp-enforcer"
+		]
+	}
+}
 ```
+
 
 ### Writing for WordPress.com VIP
 
