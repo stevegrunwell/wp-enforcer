@@ -91,7 +91,7 @@ You may also run PHP Code Beautifier and Fixer, which can fix many common indent
 
 ```bash
 $ ./vendor/bin/phpcbf
-``
+```
 
 Once CodeSniffer comes back clean, re-run the WP Enforcer installation script to restore the Git hook, forcing all future commits to be clean:
 
