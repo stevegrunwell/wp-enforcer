@@ -6,6 +6,8 @@ readonly VERSION="0.5.0"
 readonly BIN="$(cd "$(dirname "$0")" && pwd -P)"
 readonly DIR="$BIN/$(dirname "$(readlink "$0")")"
 readonly PROJECT="$(pwd)"
+readonly ROOT="$DIR/$1"
+
 vip=false
 ruleset=false
 
@@ -16,6 +18,10 @@ error() {
   echo "You may re-run this setup at any time by running $DIR/wp-enforcer"
   echo
   exit 1;
+}
+
+update_root_path() {
+  sed -i.bak /{root}/"$ROOT"/g "$DIR"/hooks/pre-commit
 }
 
 # Define command-line options here.
@@ -107,6 +113,7 @@ if [[ -f "$PROJECT"/.git/hooks/pre-commit ]]; then
     echo "A pre-commit hook already exists in $PROJECT/.git/hooks/pre-commit."
     if confirm "Overwrite the existing file?"; then
       copy_hook "pre-commit"
+      update_root_path
     fi
   else
     echo "pre-commit hook already exists, skipping"
@@ -114,6 +121,7 @@ if [[ -f "$PROJECT"/.git/hooks/pre-commit ]]; then
 
 else
   copy_hook "pre-commit"
+  update_root_path
 fi
 
 # Copy the PHP_CodeSniffer standards file
