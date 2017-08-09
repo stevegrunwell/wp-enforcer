@@ -5,7 +5,7 @@
 readonly VERSION="0.5.0"
 readonly BIN="$(cd "$(dirname "$0")" && pwd -P)"
 readonly DIR="$BIN/$(dirname "$(readlink "$0")")"
-readonly PROJECT="$(pwd)"
+readonly PROJECT="$(git rev-parse --show-toplevel)"
 readonly ROOT="$DIR/$1"
 
 vip=false
