@@ -21,7 +21,7 @@ error() {
 }
 
 update_root_path() {
-  sed -i.bak s={root}=${ROOT}=g ${DIR}/hooks/pre-commit
+  sed -i.bak s={root}=${ROOT}=g ${PROJECT}/.git/hooks/pre-commit
 }
 
 # Define command-line options here.
