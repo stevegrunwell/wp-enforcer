@@ -5,7 +5,9 @@
 # @package WP Enforcer
 
 # Determine if we have a phpcs.xml file
-if [[ -f ./phpcs.xml ]]; then
+if [[ $(phpcs -i | grep WordPress | head -c1 | wc -c) -ne 0 ]]; then
+	standard="--standard=WordPress"
+elif [[ -f ./phpcs.xml ]]; then
 	standard="--standard=./phpcs.xml"
 else
 	standard=''
