@@ -124,8 +124,11 @@ else
   update_root_path
 fi
 
-# Copy the PHP_CodeSniffer standards file
-if [[ ! -f "$PROJECT"/phpcs.xml && "$ruleset" = false ]]; then
+# Copy the PHP_CodeSniffer standards file if WordPress standard is not available
+#
+if [[ $(phpcs -i | grep WordPress | head -c1 | wc -c) -ne 0 ]]; then
+  echo "WordPress standard is installed as global"
+elif [[ ! -f "$PROJECT"/phpcs.xml && "$ruleset" = false ]]; then
   if [ "$vip" = false ]; then
     sample_file_name="phpcs.xml.sample"
   else
