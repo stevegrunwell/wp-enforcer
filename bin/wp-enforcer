@@ -24,8 +24,8 @@ error() {
 
 update_root_path() {
   if [[ "global" -eq ${PHPCS_PATH} && $(phpcs -i | grep WordPress | head -c1 | wc -c) -ne 0 ]]; then
-    sed -i.bak s={phpcs_path}=${PHPCS_PATH}/=g ${PROJECT}/.git/hooks/pre-commit
-    sed -i.bak s={phpcs_standard}=${PHPCS_STANDARD}/=g ${PROJECT}/.git/hooks/pre-commit
+    sed -i.bak s={phpcs_path}=${PHPCS_PATH}=g ${PROJECT}/.git/hooks/pre-commit
+    sed -i.bak s={phpcs_standard}=${PHPCS_STANDARD}=g ${PROJECT}/.git/hooks/pre-commit
   else
     sed -i.bak s={phpcs_path}=${PROJECT}/vendor/bin/phpcs=g ${PROJECT}/.git/hooks/pre-commit
   fi
