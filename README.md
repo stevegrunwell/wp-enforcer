@@ -61,6 +61,21 @@ If you have your vendor directory in a lower level path just add it:
 }
 ```
 
+Also you can setup a global phpcs instance and standard to use:
+
+```json
+{
+	"scripts": {
+		"post-install-cmd": [
+			"wp-enforcer global WordPress-Core"
+		],
+		"post-update-cmd": [
+			"wp-enforcer global WordPress-Core"
+		]
+	}
+}
+```
+
 
 ### Writing for WordPress.com VIP
 
