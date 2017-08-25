@@ -5,7 +5,7 @@
 # @package WP Enforcer
 
 # Determine if we have a phpcs.xml file
-if [[ "phpcs" -eq "{phpcs_path}" && {phpcs_path} $(phpcs -i | grep {phpcs_standard} | head -c1 | wc -c) -ne 0 ]]; then
+if [[ "phpcs" -eq "{phpcs_path}" && 0 -ne $(phpcs -i | grep {phpcs_standard} | head -c1 | wc -c) ]]; then
 	standard="--standard={phpcs_standard}"
 elif [[ -f ./phpcs.xml ]]; then
 	standard="--standard=./phpcs.xml"
