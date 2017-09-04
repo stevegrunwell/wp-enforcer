@@ -7,7 +7,7 @@ readonly BIN="$(cd "$(dirname "$0")" && pwd -P)"
 readonly DIR="$BIN/$(dirname "$(readlink "$0")")"
 readonly PROJECT="$(git rev-parse --show-toplevel)"
 readonly PHPCS_PATH=$1
-readonly PHPCS_STANDARD=${2-" "}
+readonly PHPCS_STANDARD=${2:-non-standard}
 readonly ROOT="${PROJECT}/${PHPCS_PATH}"
 
 vip=false
