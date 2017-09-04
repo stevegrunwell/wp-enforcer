@@ -7,7 +7,7 @@ readonly BIN="$(cd "$(dirname "$0")" && pwd -P)"
 readonly DIR="$BIN/$(dirname "$(readlink "$0")")"
 readonly PROJECT="$(git rev-parse --show-toplevel)"
 readonly PHPCS_PATH=$1
-readonly PHPCS_STANDARD=$2
+readonly PHPCS_STANDARD=${2-" "}
 readonly ROOT="${PROJECT}/${PHPCS_PATH}"
 
 vip=false
@@ -23,7 +23,7 @@ error() {
 }
 
 update_root_path() {
-  if [[ "global" -eq ${PHPCS_PATH} && 0 -lt $(phpcs -i | grep -woe "${PHPCS_STANDARD}" | wc -w) ]]; then
+  if [[ "global" -eq ${PHPCS_PATH} && 0 -lt $(phpcs -i | grep -woe ${PHPCS_STANDARD} | wc -w) ]]; then
     sed -i.bak s={phpcs_path}=phpcs=g ${PROJECT}/.git/hooks/pre-commit
     sed -i.bak s={phpcs_standard}=${PHPCS_STANDARD}=g ${PROJECT}/.git/hooks/pre-commit
   elif [[ "global" -eq ${PHPCS_PATH} ]]; then
@@ -138,7 +138,7 @@ fi
 
 # Copy the PHP_CodeSniffer standards file if WordPress standard is not available
 #
-if [[ "global" -eq ${PHPCS_PATH} && 0 -ne $(phpcs -i | grep ${PHPCS_STANDARD} | head -c1 | wc -c) ]]; then
+if [[ "global" -eq ${PHPCS_PATH} && 0 -lt $(phpcs -i | grep -woe ${PHPCS_STANDARD} | wc -w) ]]; then
   echo "WordPress standard is installed as global"
 elif [[ ! -f "$PROJECT"/phpcs.xml && "$ruleset" = false ]]; then
   if [ "$vip" = false ]; then
