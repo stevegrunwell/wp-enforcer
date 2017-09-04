@@ -23,12 +23,10 @@ error() {
 }
 
 update_root_path() {
-  if [[ "global" -eq ${PHPCS_PATH} && 0 -lt $(phpcs -i | grep -woe ${PHPCS_STANDARD} | wc -w) ]]; then
+
+  if [[ "global" -eq ${PHPCS_PATH} ]]; then
     sed -i.bak s={phpcs_path}=phpcs=g ${PROJECT}/.git/hooks/pre-commit
     sed -i.bak s={phpcs_standard}=${PHPCS_STANDARD}=g ${PROJECT}/.git/hooks/pre-commit
-  elif [[ "global" -eq ${PHPCS_PATH} ]]; then
-    sed -i.bak s={phpcs_path}=phpcs=g ${PROJECT}/.git/hooks/pre-commit
-    sed -i.bak s={phpcs_standard}=" "=g ${PROJECT}/.git/hooks/pre-commit
   else
     sed -i.bak s={phpcs_path}=${PROJECT}/vendor/bin/phpcs=g ${PROJECT}/.git/hooks/pre-commit
   fi
