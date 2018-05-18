@@ -19,6 +19,5 @@
 		<severity>0</severity>
 	</rule>
 
-	<rule ref="WordPress-Extra" />
-	<rule ref="WordPress-Docs" />
+	<rule ref="WordPress-Core" />
 </ruleset>
