@@ -46,6 +46,36 @@ If you'd like to require WP Enforcer for all developers on your project, you can
 }
 ```
 
+If you have your vendor directory in a lower level path just add it:
+
+```json
+{
+	"scripts": {
+		"post-install-cmd": [
+			"wp-enforcer <path/to/dir>"
+		],
+		"post-update-cmd": [
+			"wp-enforcer <path/to/dir>"
+		]
+	}
+}
+```
+
+Also you can setup a global phpcs instance and standard to use:
+
+```json
+{
+	"scripts": {
+		"post-install-cmd": [
+			"wp-enforcer global WordPress-Core"
+		],
+		"post-update-cmd": [
+			"wp-enforcer global WordPress-Core"
+		]
+	}
+}
+```
+
 
 ### Writing for WordPress.com VIP
 
