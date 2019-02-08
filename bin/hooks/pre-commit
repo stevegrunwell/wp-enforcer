@@ -16,7 +16,7 @@ fi
 # Run PHP_CodeSniffer
 echo "Running PHP_CodeSniffer..."
 
-git diff --name-only --cached --diff-filter=ACMRTUXB **/*.php | xargs {phpcs_path} $standard
+git diff --name-only --cached --diff-filter=ACMR | grep \.php | awk '{print}' ORS=' ' | xargs phpcs $standard
 if [ $? != 0 ]
 then
 	echo "Please fix coding standards errors before committing"
