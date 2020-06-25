@@ -1,7 +1,12 @@
 {
-	"name": "stevegrunwell/wp-enforcer",
+	"name": "angrycreative/wp-enforcer",
 	"description": "Git hooks to encourage well-written WordPress.",
 	"authors": [
+		{
+			"name": "Angry Creative",
+			"email": "hej@angrycreative.se",
+			"homepage": "https://angrycreative.se"
+		},
 		{
 			"name": "Steve Grunwell",
 			"email": "steve@stevegrunwell.com",
@@ -9,8 +14,8 @@
 		}
 	],
 	"support": {
-			"source": "https://github.com/stevegrunwell/wp-enforcer",
-			"issues": "https://github.com/stevegrunwell/wp-enforcer/issues"
+			"source": "https://github.com/Angrycreative/wp-enforcer",
+			"issues": "https://github.com/Angrycreative/wp-enforcer/issues"
 	},
 	"license": "MIT",
 	"keywords": [

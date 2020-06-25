@@ -5,8 +5,10 @@
 # @package WP Enforcer
 
 # Determine if we have a phpcs.xml file
-if [[ -f ./phpcs.xml ]]; then
-	standard="--standard=./phpcs.xml"
+if [[ "phpcs" -eq "{phpcs_path}" && 0 -lt $(phpcs -i | grep -woe {phpcs_standard} | wc -w) ]]; then
+	standard="--standard={phpcs_standard}"
+elif [[ -f {project}/phpcs.xml ]]; then
+	standard="--standard={project}/phpcs.xml"
 else
 	standard=''
 fi
@@ -14,7 +16,7 @@ fi
 # Run PHP_CodeSniffer
 echo "Running PHP_CodeSniffer..."
 
-git diff --name-only --cached --diff-filter=ACMRTUXB | xargs site/vendor/bin/phpcs $standard
+git diff --name-only --cached --diff-filter=ACMR | grep \.php | awk '{print}' ORS=' ' | xargs phpcs $standard
 if [ $? != 0 ]
 then
 	echo "Please fix coding standards errors before committing"

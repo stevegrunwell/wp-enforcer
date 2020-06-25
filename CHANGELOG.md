@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.6.0] - 2020-06-25
+
+* Breaks fork from original repo since it's abandoned since 2017.
+* Adds ability to define location of vendor folder.
+* Adds updated PHPCS rule set.
+
 
 ## [0.5.0] - 2017-05-28
 

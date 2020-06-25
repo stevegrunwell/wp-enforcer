@@ -2,10 +2,14 @@
 #
 # Copy files for WP Enforcer into the project directory.
 
-readonly VERSION="0.5.0"
+readonly VERSION="0.6.0"
 readonly BIN="$(cd "$(dirname "$0")" && pwd -P)"
 readonly DIR="$BIN/$(dirname "$(readlink "$0")")"
-readonly PROJECT="$(pwd)"
+readonly PROJECT="$(git rev-parse --show-toplevel)"
+readonly PHPCS_PATH=$1
+readonly PHPCS_STANDARD=${2:-non-standard}
+readonly ROOT="${PROJECT}/${PHPCS_PATH}"
+
 vip=false
 ruleset=false
 
@@ -16,6 +20,18 @@ error() {
   echo "You may re-run this setup at any time by running $DIR/wp-enforcer"
   echo
   exit 1;
+}
+
+update_root_path() {
+
+  if [[ "global" -eq ${PHPCS_PATH} ]]; then
+    sed -i.bak s={phpcs_path}=phpcs=g ${PROJECT}/.git/hooks/pre-commit
+    sed -i.bak s={phpcs_standard}=${PHPCS_STANDARD}=g ${PROJECT}/.git/hooks/pre-commit
+  else
+    sed -i.bak s={phpcs_path}=${PROJECT}/vendor/bin/phpcs=g ${PROJECT}/.git/hooks/pre-commit
+  fi
+
+  sed -i.bak s={project}=${PROJECT}=g ${PROJECT}/.git/hooks/pre-commit
 }
 
 # Define command-line options here.
@@ -107,6 +123,7 @@ if [[ -f "$PROJECT"/.git/hooks/pre-commit ]]; then
     echo "A pre-commit hook already exists in $PROJECT/.git/hooks/pre-commit."
     if confirm "Overwrite the existing file?"; then
       copy_hook "pre-commit"
+      update_root_path
     fi
   else
     echo "pre-commit hook already exists, skipping"
@@ -114,10 +131,14 @@ if [[ -f "$PROJECT"/.git/hooks/pre-commit ]]; then
 
 else
   copy_hook "pre-commit"
+  update_root_path
 fi
 
-# Copy the PHP_CodeSniffer standards file
-if [[ ! -f "$PROJECT"/phpcs.xml && "$ruleset" = false ]]; then
+# Copy the PHP_CodeSniffer standards file if WordPress standard is not available
+#
+if [[ "global" -eq ${PHPCS_PATH} && 0 -lt $(phpcs -i | grep -woe ${PHPCS_STANDARD} | wc -w) ]]; then
+  echo "WordPress standard has been installed as global using ${PHPCS_STANDARD} as standard"
+elif [[ ! -f "$PROJECT"/phpcs.xml && "$ruleset" = false ]]; then
   if [ "$vip" = false ]; then
     sample_file_name="phpcs.xml.sample"
   else
@@ -140,4 +161,6 @@ fi
 
 echo
 echo "WP Enforcer installed successfully!"
+echo "PhpCS path: ${PHPCS_PATH}"
+echo "Standard: ${PHPCS_STANDARD}"
 exit 0

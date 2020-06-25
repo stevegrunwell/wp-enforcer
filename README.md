@@ -1,5 +1,7 @@
 # WP Enforcer
 
+**This fork has been altered from the original. The original looks to be largely abandoned.**
+
 [![GitHub release](https://img.shields.io/github/release/stevegrunwell/wp-enforcer.svg)](https://github.com/stevegrunwell/wp-enforcer/releases/latest)
 [![GitHub license](https://img.shields.io/github/license/stevegrunwell/wp-enforcer.svg)](https://github.com/stevegrunwell/wp-enforcer/blob/master/LICENSE.txt)
 
@@ -41,6 +43,36 @@ If you'd like to require WP Enforcer for all developers on your project, you can
 		],
 		"post-update-cmd": [
 			"wp-enforcer"
+		]
+	}
+}
+```
+
+If you have your vendor directory in a lower level path just add it:
+
+```json
+{
+	"scripts": {
+		"post-install-cmd": [
+			"wp-enforcer <path/to/dir>"
+		],
+		"post-update-cmd": [
+			"wp-enforcer <path/to/dir>"
+		]
+	}
+}
+```
+
+Also you can setup a global phpcs instance and standard to use:
+
+```json
+{
+	"scripts": {
+		"post-install-cmd": [
+			"wp-enforcer global WordPress-Core"
+		],
+		"post-update-cmd": [
+			"wp-enforcer global WordPress-Core"
 		]
 	}
 }
